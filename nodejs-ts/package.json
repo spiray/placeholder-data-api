@@ -1,0 +1,43 @@
+{
+  "name": "placeholder-data-api",
+  "version": "1.0.0",
+  "description": "This is a REST API that will have endpoints to GET/POST/PUT/PATCH/DELETE data for various categories",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node .",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier **/*.{md,json} --write",
+    "format:check": "prettier **/*.{md,json} --check"
+  },
+  "keywords": [
+    "rest",
+    "api",
+    "data",
+    "language",
+    "compare"
+  ],
+  "author": "Yosef Spira",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "got": "^11.8.0",
+    "morgan": "^1.10.0",
+    "typescript": "^4.0.5"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.9",
+    "@types/got": "^9.6.11",
+    "@types/morgan": "^1.9.2",
+    "@types/node": "^14.14.8",
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.1.2",
+    "ts-node": "^9.0.0"
+  }
+}
