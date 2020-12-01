@@ -1,4 +1,4 @@
-# Placeholder-Data-API
+# Placeholder Data API
 
 ## Getting Started
 

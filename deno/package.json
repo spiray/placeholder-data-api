@@ -1,0 +1,15 @@
+{
+  "name": "deno-placeholder-data-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "lint": "deno lint --unstable ./api/**/*.ts index.ts",
+    "lint:format": "deno fmt --unstable ./api/**/*.ts index.ts"
+  },
+  "author": "Yosef Spira",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^3.9.3"
+  }
+}
