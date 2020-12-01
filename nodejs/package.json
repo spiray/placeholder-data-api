@@ -1,0 +1,29 @@
+{
+  "name": "placeholder-data-api",
+  "version": "1.0.0",
+  "description": "Project to compare REST APIs in popular langauages",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix",
+    "format": "prettier **/*.{md,json} --write",
+    "format:check": "prettier **/*.{md,json} --check"
+  },
+  "author": "Yosef Spira",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.2.1"
+  }
+}

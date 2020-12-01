@@ -1,17 +1,17 @@
-name: Lint NodeJS-TS PR
+name: Lint NodeJS PR
 
 on:
   pull_request:
     branches:
       - main
     paths:
-      - "nodejs-ts/**"
+      - "nodejs/**"
 jobs:
   lint-node-ts:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: nodejs-ts
+        working-directory: nodejs
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
