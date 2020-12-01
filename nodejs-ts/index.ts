@@ -9,6 +9,19 @@ const app = express();
 app.use(morgan('tiny'));
 app.use(express.json());
 
+app.get('/', (_, res) => {
+  return res.json({
+    message: 'See below for available endpoints/actions',
+    endpoints: {
+      GET_ALL: '/posts',
+      GET: '/posts/:id',
+      POST: '/posts title body userID',
+      PUT: '/posts id title body userId',
+      PATCH: '/posts/:id title? body? userId?',
+      DELETE: '/posts/:id'
+    }
+  });
+});
 app.get('/posts', async (_, res) => {
   const response = await fetch(`${BASE_URL}/posts`);
   const posts: Array<Post> = await response.json();
@@ -35,7 +48,7 @@ app.post('/posts', async (req, res) => {
   return res.json(post);
 });
 
-app.put('/posts/', async (req, res) => {
+app.put('/posts', async (req, res) => {
   const { id, title, body, userId }: Post = req.body;
   const response = await fetch(`${BASE_URL}/posts/${id}`, {
     method: 'PUT',
@@ -66,7 +79,7 @@ app.delete('/posts/:id', async (req, res) => {
     method: 'DELETE'
   });
 
-  return res.sendStatus(200)
+  return res.sendStatus(200);
 });
 
 app.listen(3000, () => console.log('Server Started @ http://localhost:3000'));
