@@ -1,0 +1,28 @@
+  name: Lint NodeJS-TS PR
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "nodejs-ts/**"
+jobs:
+  lint-node-ts:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: nodejs-ts
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "15.x"
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Linter
+        run: npm run lint
