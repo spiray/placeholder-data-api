@@ -1,6 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
-import postRouter from './api/posts/posts.routes';
+import postRouter from './lib/api/posts/posts.routes';
 
 const app = express();
 
