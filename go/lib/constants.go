@@ -9,3 +9,16 @@ type Post struct {
 	Title  string `json:"title"`
 	Body   string `json:"body"`
 }
+
+// Response is the structure for the home response
+type Response struct {
+	message   string
+	endpoints struct {
+		GET_ALL string
+		GET     string
+		POST    string
+		PUT     string
+		PATCH   string
+		DELETE  string
+	}
+}

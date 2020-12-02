@@ -1,6 +1,7 @@
 package lib
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -10,11 +11,7 @@ import (
 )
 
 func getAllPosts(w http.ResponseWriter, r *http.Request) {
-	resp, err := http.Get(baseURL + "/posts")
-	if err != nil {
-		println(err)
-		return
-	}
+	resp, _ := http.Get(baseURL + "/posts")
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Fprintf(w, "%s", body)
@@ -23,30 +20,34 @@ func getAllPosts(w http.ResponseWriter, r *http.Request) {
 func getOnePost(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
-	resp, err := http.Get(lib.baseURL + "/posts/" + id)
-	if err != nil {
-		println(err)
-		return
-	}
+	resp, _ := http.Get(baseURL + "/posts/" + id)
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Fprintf(w, "%s", body)
 }
 
 func createPost(w http.ResponseWriter, r *http.Request) {
-	resp, err := http.Post(baseURL+"/posts", "application/json", r.Body)
-	if err != nil {
-		println(err)
-		return
-	}
+	resp, _ := http.Post(baseURL+"/posts", "application/json", r.Body)
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Fprintf(w, "%s", body)
 }
 
 func homePage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Welcome to the HomePage!")
-	fmt.Println("Endpoint Hit: homePage")
+	jsonResponse := []byte(`{
+        "message": "See \"endpoints\" for available endpoints/actions",
+        "endpoints":{
+            "GET_ALL":"/posts",
+            "GET":"/posts?id=1",
+            "POST":"/posts title body userID",
+			"PUT":"/posts id title body userID",
+			"PATCH": "/posts?id=1 title? body? userID?",
+			"DELETE": "/posts?id=1",
+			},
+			}`)
+	var response Response
+	json.Unmarshal(jsonResponse, &response)
+	fmt.Fprintf(w, "%+v\n", response)
 }
 
 // HandleRequests is the request handler for all incoming requests
