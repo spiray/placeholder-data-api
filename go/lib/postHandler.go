@@ -1,25 +1,49 @@
 package lib
 
 import (
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func getAllPosts(w http.ResponseWriter, r *http.Request) {
 	resp, err := http.Get(baseURL + "/posts")
-	print(resp)
 	if err != nil {
 		println(err)
 		return
 	}
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
-	json.NewEncoder(w).Encode(body)
-
+	fmt.Fprintf(w, "%s", body)
 }
+
+func getOnePost(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+	resp, err := http.Get(lib.baseURL + "/posts/" + id)
+	if err != nil {
+		println(err)
+		return
+	}
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Fprintf(w, "%s", body)
+}
+
+func createPost(w http.ResponseWriter, r *http.Request) {
+	resp, err := http.Post(baseURL+"/posts", "application/json", r.Body)
+	if err != nil {
+		println(err)
+		return
+	}
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Fprintf(w, "%s", body)
+}
+
 func homePage(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Welcome to the HomePage!")
 	fmt.Println("Endpoint Hit: homePage")
@@ -27,7 +51,11 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 
 // HandleRequests is the request handler for all incoming requests
 func HandleRequests() {
-	http.HandleFunc("/", homePage)
-	http.HandleFunc("/posts", getAllPosts)
-	log.Fatal(http.ListenAndServe(":10000", nil))
+	myRouter := mux.NewRouter().StrictSlash(true)
+
+	myRouter.HandleFunc("/", homePage)
+	myRouter.HandleFunc("/posts", createPost).Methods("POST")
+	myRouter.HandleFunc("/posts", getAllPosts)
+	myRouter.HandleFunc("/posts/{id}", getOnePost)
+	log.Fatal(http.ListenAndServe(":10000", myRouter))
 }
