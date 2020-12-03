@@ -17,8 +17,8 @@ def home():
             'GET': '/posts?id=1',
             'POST': '/posts title body userID',
             'PUT': '/posts id title body userId',
-            'PATCH': '/posts/?id=1 title? body? userId?',
-            'DELETE': '/posts/?id=1'
+            'PATCH': '/posts?id=1 title? body? userId?',
+            'DELETE': '/posts?id=1'
         }
     })
 

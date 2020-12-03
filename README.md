@@ -7,7 +7,7 @@ Project to compare REST APIs in popular languages
 - [x] NodeJS + TypeScript
 - [x] Python
 - [ ] Rust
-- [ ] Go
+- [x] Go
 - [ ] Java
 - [ ] C#
 - [x] Deno
