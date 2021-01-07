@@ -106,3 +106,4 @@ dist
 go/go
 
 rust/target/
+csharp/bin/
